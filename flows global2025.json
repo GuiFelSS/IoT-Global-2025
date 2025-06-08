@@ -1,0 +1,151 @@
+[
+    {
+        "id": "7c9b1bb7ac4d275f",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "114813714c1ea2ee",
+        "type": "mqtt in",
+        "z": "7c9b1bb7ac4d275f",
+        "name": "RX /ralo/+/nivel",
+        "topic": "/ralo/+/nivel",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "brokerConfig",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 200,
+        "y": 220,
+        "wires": [
+            [
+                "affd61a0acac460a"
+            ]
+        ]
+    },
+    {
+        "id": "affd61a0acac460a",
+        "type": "json",
+        "z": "7c9b1bb7ac4d275f",
+        "name": "Parse JSON",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "2be2c78b0f0df528"
+            ]
+        ]
+    },
+    {
+        "id": "2be2c78b0f0df528",
+        "type": "function",
+        "z": "7c9b1bb7ac4d275f",
+        "name": "Anexa lat/lng e status",
+        "func": "// msg.payload já é um objeto { id: \"ralo01\", nivel: <number>, boia: <boolean>, timestamp: \"<ms>\" }\nlet payload = msg.payload;\nconst coordenadas = {\n    \"ralo01\": { lat: -23.550520, lng: -46.633308 }\n};\nconst id = payload.id;\nif (!id || !coordenadas[id]) {\n    return null;\n}\nlet nivel = parseFloat(payload.nivel);\nlet boia = (typeof payload.boia === \"boolean\") ? payload.boia : false;\n// Definir \"entupido\" SOMENTE se nivel <= 20 OU boia == true\nlet status = (nivel <= 20 || boia) ? \"entupido\" : \"ok\";\nlet novoPayload = {\n    id: id,\n    nivel: nivel,\n    boia: boia,\n    status: status,\n    lat: coordenadas[id].lat,\n    lng: coordenadas[id].lng,\n    timestamp: payload.timestamp\n};\nmsg.payload = novoPayload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 220,
+        "wires": [
+            [
+                "e56b1c2696050c11"
+            ]
+        ]
+    },
+    {
+        "id": "e56b1c2696050c11",
+        "type": "switch",
+        "z": "7c9b1bb7ac4d275f",
+        "name": "status == 'entupido'?",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "entupido",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 840,
+        "y": 220,
+        "wires": [
+            [
+                "40fcd3dc808e0e3b",
+                "2dcd6b89fddd5e91"
+            ]
+        ]
+    },
+    {
+        "id": "40fcd3dc808e0e3b",
+        "type": "mqtt out",
+        "z": "7c9b1bb7ac4d275f",
+        "name": "TX /app/mapa",
+        "topic": "/app/mapa",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "brokerConfig",
+        "x": 1040,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2dcd6b89fddd5e91",
+        "type": "debug",
+        "z": "7c9b1bb7ac4d275f",
+        "name": "Debug Payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 860,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "brokerConfig",
+        "type": "mqtt-broker",
+        "name": "CloudAMQP MQTT",
+        "broker": "albatross.rmq.cloudamqp.com",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
