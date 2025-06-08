@@ -14,6 +14,7 @@
 O dispositivo é conectado via Wi-Fi e envia os dados por **protocolo MQTT**, utilizando o broker **CloudAMQP**, para serem processados e visualizados em tempo real no **Node-RED**, com destaque para um **mapa de calor interativo** que mostra os pontos de risco com base nas coordenadas GPS dos bueiros.
 
 Link do simulador Wokwi: [https://wokwi.com/projects/432803480845522945](https://wokwi.com/projects/432803480845522945)
+Link para o video: [https://youtu.be/WJWTfMjoVfw](https://youtu.be/WJWTfMjoVfw)
 
 ---
 
