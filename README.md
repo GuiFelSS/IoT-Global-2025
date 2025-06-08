@@ -97,3 +97,19 @@ O status dos bueiros é exibido no Node-RED através dos payloads no painel de d
 Isso facilita a tomada de decisão por parte das equipes de manutenção urbana em tempo real.
 
 ---
+
+## 🖼️ Ilustrações do Projeto
+
+### Sensor JSN-SR04T que iremos utilizar:
+![Sensor Ultrassônico JSN-SR04T](sensor_aprova_de_agua.png)
+
+### Boia magnética (simulada com potenciômetro) utilizada no protótipo:
+![Boia magnética](boia_que_iremos_usar.webp)
+
+### Simulação de instalação feita por IA:
+![Simulação da Instalação](simulacao_instalacao.png)
+
+### Cenário real que demonstra onde o protótipo poderia ser aplicado:
+![Cenário real da aplicação](cenario_real.webp)
+
+---
