@@ -9,7 +9,7 @@
 
 ## 📖 Descrição do Projeto
 
-**Alagaqui** é um sistema de monitoramento em tempo real de bueiros e bocas de lobo para prevenção de enchentes. Utiliza sensores ultrassônicos JSN-SR04T para identificar o **nível da água** e um potenciômetro simulando uma boia magnética que complementa a leitura, indicando possível **obstrução**. 
+**Alagaqui** é um sistema de monitoramento em tempo real de bueiros e bocas de lobo para prevenção de enchentes. Utiliza sensores ultrassônicos JSN-SR04T para identificar o **nível da água** e um potenciômetro simulando uma boia magnética que complementa a leitura de **obstrução**. 
 
 O dispositivo é conectado via Wi-Fi e envia os dados por **protocolo MQTT**, utilizando o broker **CloudAMQP**, para serem processados e visualizados em tempo real no **Node-RED**, com destaque para um **mapa de calor interativo** que mostra os pontos de risco com base nas coordenadas GPS dos bueiros.
 
@@ -78,7 +78,7 @@ Link do simulador Wokwi: [https://wokwi.com/projects/432803480845522945](https:/
 
 ### 2. Broker MQTT (CloudAMQP)
 
-- Configure os nós MQTT do Node-RED com o broker e credenciais já informadas
+- Configure os nós MQTT do Node-RED com o broker e credenciais já informadas acima
 
 ### 3. Node-RED
 
